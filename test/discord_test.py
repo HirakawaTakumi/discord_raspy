@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import discord
 from discord import message
 from discord import channel
