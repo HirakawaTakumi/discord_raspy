@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-
 import discord
 from discord import message
 from discord import channel
 import sys
 
-from discord import guild
 
 with open('token.txt', 'r') as f:
     data = f.readline()
@@ -18,7 +16,7 @@ client = discord.Client()
 @client.event
 async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
-    print('ログインしました')
+    guild = discord.utils.get(client.guilds, name='bot_test')
 
     channel = discord.utils.get(guild.text_channels, name='debug')
     await channel.send('ログインしたよ！')
