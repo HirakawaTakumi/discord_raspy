@@ -3,6 +3,8 @@ from discord import message
 from discord import channel
 import sys
 
+from discord import guild
+
 with open('token.txt', 'r') as f:
     data = f.readline()
 TOKEN = data
@@ -16,8 +18,7 @@ async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
 
-    channel = client.get_channel(846438705098784808)
-    print(channel)
+    channel = discord.utils.get(guild.text_channels, name='debug')
     await channel.send('ログインしたよ！')
 
 # メッセージ受信時に動作する処理
@@ -35,7 +36,7 @@ async def on_message(message):
 
     # quitでbotの停止（id指定ではなくロールで判断したい）
     if message.content == '/quit':
-        if message.author.id == 395507828162560000:
+        if 'admin' in [users_lole.name for users_lole in message.author.roles]:
             await message.channel.send('バイバイ！また遊んでね')
             await client.logout()
             await sys.exit()
